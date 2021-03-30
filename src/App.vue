@@ -18,8 +18,7 @@ export default defineComponent({
       {
         label: 'google',
         key: 'google',
-        favico: require('./assets/google.jpg'),
-        closable: false
+        favico: require('./assets/google.jpg')
       },
       {
         label: 'facebook',
