@@ -1,6 +1,6 @@
 {
   "name": "vue3-tabs-chrome",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
     "lib": "vue-cli-service build --target lib --name vue3-tabs-chrome ./package/index.ts"
   },
   "files": [
-    "dist/*.js"
+    "dist/**.*"
   ],
   "repository": {
     "type": "git",
