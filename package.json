@@ -1,17 +1,30 @@
 {
   "name": "vue3-tabs-chrome",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name vue3-tabs-chrome ./package/index.ts"
   },
+  "files": [
+    "dist/*.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viewweiwu/vue3-tabs-chrome.git"
+  },
+  "main": "dist/vue3-tabs-chrome.common.js",
+  "unpkg": "dist/vue3-tabs-chrome.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",
+    "draggabilly": "^2.3.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@types/draggabilly": "^2.1.2",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",

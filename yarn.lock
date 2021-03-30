@@ -991,6 +991,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/draggabilly@^2.1.2":
+  version "2.1.2"
+  resolved "http://npm.wpt.la/@types%2fdraggabilly/-/draggabilly-2.1.2.tgz#66cd0ae03da385d7e09fbcc6f352a54ed8b3a03b"
+  integrity sha1-Zs0K4D2jhdfgn7zG81KlTtizoDs=
+
 "@types/express-serve-static-core@*", "@types/express-serve-static-core@^4.17.18":
   version "4.17.19"
   resolved "http://npm.wpt.la/@types%2fexpress-serve-static-core/-/express-serve-static-core-4.17.19.tgz#00acfc1632e729acac4f1530e9e16f6dd1508a1d"
@@ -3594,6 +3599,14 @@ dotenv@^8.2.0:
   resolved "http://npm.wpt.la/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha1-l+YZJZradQ7qPk6j4mvO6lQksWo=
 
+draggabilly@^2.3.0:
+  version "2.3.0"
+  resolved "http://npm.wpt.la/draggabilly/-/draggabilly-2.3.0.tgz#e0e653e09b938eb7ae654c4b7600114b24a2ee50"
+  integrity sha1-4OZT4JuTjreuZUxLdgARSySi7lA=
+  dependencies:
+    get-size "^2.0.2"
+    unidragger "^2.3.0"
+
 duplexer@^0.1.1:
   version "0.1.2"
   resolved "http://npm.wpt.la/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
@@ -4024,6 +4037,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "http://npm.wpt.la/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+ev-emitter@^1.0.1:
+  version "1.1.1"
+  resolved "http://npm.wpt.la/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
+  integrity sha1-jxiwzlx2pdGAF/ccCnlcZbkTjyo=
 
 event-pubsub@4.3.0:
   version "4.3.0"
@@ -4612,6 +4630,11 @@ get-own-enumerable-property-symbols@^3.0.0:
   version "3.0.2"
   resolved "http://npm.wpt.la/get-own-enumerable-property-symbols/-/get-own-enumerable-property-symbols-3.0.2.tgz#b5fde77f22cbe35f390b4e089922c50bce6ef664"
   integrity sha1-tf3nfyLL4185C04ImSLFC85u9mQ=
+
+get-size@^2.0.2:
+  version "2.0.3"
+  resolved "http://npm.wpt.la/get-size/-/get-size-2.0.3.tgz#54a1d0256b20ea7ac646516756202769941ad2ef"
+  integrity sha1-VKHQJWsg6nrGRlFnViAnaZQa0u8=
 
 get-stream@^3.0.0:
   version "3.0.0"
@@ -9144,6 +9167,13 @@ unicode-property-aliases-ecmascript@^1.0.4:
   resolved "http://npm.wpt.la/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.1.0.tgz#dd57a99f6207bedff4628abefb94c50db941c8f4"
   integrity sha1-3Vepn2IHvt/0Yoq++5TFDblByPQ=
 
+unidragger@^2.3.0:
+  version "2.3.1"
+  resolved "http://npm.wpt.la/unidragger/-/unidragger-2.3.1.tgz#2e8c34feff61affa96dc895234ddfc1ea4ec7515"
+  integrity sha1-Low0/v9hr/qW3IlSNN38HqTsdRU=
+  dependencies:
+    unipointer "^2.3.0"
+
 union-value@^1.0.0:
   version "1.0.1"
   resolved "http://npm.wpt.la/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"
@@ -9153,6 +9183,13 @@ union-value@^1.0.0:
     get-value "^2.0.6"
     is-extendable "^0.1.1"
     set-value "^2.0.1"
+
+unipointer@^2.3.0:
+  version "2.3.0"
+  resolved "http://npm.wpt.la/unipointer/-/unipointer-2.3.0.tgz#ba0dc462ce31c2a88e80810e19c3bae0ce47ed9f"
+  integrity sha1-ug3EYs4xwqiOgIEOGcO64M5H7Z8=
+  dependencies:
+    ev-emitter "^1.0.1"
 
 uniq@^1.0.1:
   version "1.0.1"

@@ -1,16 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  {{ tab }}
+  <vue-3-tabs-chrome :tabs="tabs" v-model="tab" />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { defineComponent, reactive, ref } from 'vue'
+import Vue3TabsChrome from '../package/Vue3TabsChrome.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    Vue3TabsChrome
+  },
+  setup() {
+    const tab = ref('google')
+    const tabs = reactive([
+      {
+        label: 'google',
+        key: 'google',
+        favico: require('./assets/google.jpg'),
+        closable: false
+      },
+      {
+        label: 'facebook',
+        key: 'facebook',
+        favico: require('./assets/fb.jpg')
+      },
+      {
+        label: 'New Tab',
+        key: 'costom key'
+      }
+    ])
+    return {
+      tabs,
+      tab
+    }
   }
 })
 </script>
@@ -20,7 +44,6 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
