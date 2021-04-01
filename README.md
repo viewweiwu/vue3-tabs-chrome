@@ -8,6 +8,10 @@ Drag-and-drop support provided by Draggabilly by @desandro.
 If you are using Vue2, please see here.
 https://github.com/viewweiwu/vue-tabs-chrome
 
+## Live Demo
+
+[https://viewweiwu.github.io/vue3-tabs-chrome/](https://viewweiwu.github.io/vue3-tabs-chrome/)
+
 ## Code Sandbox
 
 https://codesandbox.io/s/crazy-mcclintock-p514v?file=/src/App.vue
