@@ -43,10 +43,13 @@ export default defineComponent({
     }
 
     const handleAdd = () => {
+      const key = 'tab' + Date.now()
       tabRef.value.addTab({
         label: 'New Tab',
-        key: 'tab' + Date.now()
+        key
       })
+
+      tab.value = key
     }
 
     const handleRemove = () => {
@@ -63,9 +66,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="less">
-.events-tip {
-  color: #999;
-}
-</style>

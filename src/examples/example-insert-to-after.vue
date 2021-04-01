@@ -1,5 +1,5 @@
 <template>
-  <vue3-tabs-chrome class="theme-dark" :ref="setTabRef" :tabs="tabs" v-model="tab" />
+  <vue3-tabs-chrome :ref="setTabRef" :tabs="tabs" v-model="tab" insert-to-after />
   <div class="btns">
     <button class="btn" @click="handleAdd">new Tab</button>
     <button class="btn" @click="handleRemove">Remove Active Tab</button>
@@ -9,7 +9,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, Ref } from 'vue'
 import Vue3TabsChrome, { Tab } from '../../package/vue3-tabs-chrome.vue'
-import '../theme-dark.less'
 
 export default defineComponent({
   name: 'App',

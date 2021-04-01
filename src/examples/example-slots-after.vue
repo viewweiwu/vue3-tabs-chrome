@@ -1,5 +1,14 @@
 <template>
-  <vue3-tabs-chrome :tabs="tabs" v-model="tab" />
+  <vue3-tabs-chrome :ref="setTabRef" :tabs="tabs" v-model="tab">
+    <template v-slot:after>
+      <button class="btn" style="height: 20px; line-height: 20px; padding: 0 10px; margin-left: 0px;" @click="handleAdd">+</button>
+      <button class="btn" style="height: 20px; line-height: 20px; padding: 0 10px; margin-left: 8px;" @click="handleStar">⭐️</button>
+    </template>
+  </vue3-tabs-chrome>
+  <div class="btns">
+    <button class="btn" @click="handleAdd">new Tab</button>
+    <button class="btn" @click="handleRemove">Remove Active Tab</button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,6 +21,7 @@ export default defineComponent({
     Vue3TabsChrome
   },
   setup() {
+    const tabRef: Ref = ref()
     const tab: Ref = ref('google')
     const tabs: Array<Tab> = reactive<Array<Tab>>([
       {
@@ -33,12 +43,36 @@ export default defineComponent({
       }
     ])
 
+    const setTabRef = (el: HTMLElement) => {
+      tabRef.value = el
+    }
+
+    const handleAdd = () => {
+      const key = 'tab' + Date.now()
+      tabRef.value.addTab({
+        label: 'New Tab',
+        key
+      })
+
+      tab.value = key
+    }
+
+    const handleStar = () => {
+      alert('⭐️⭐️⭐️⭐️⭐️⭐️⭐️')
+    }
+
+    const handleRemove = () => {
+      tabRef.value.removeTab(tab.value)
+    }
+
     return {
       tabs,
-      tab
+      tab,
+      handleAdd,
+      handleStar,
+      handleRemove,
+      setTabRef
     }
   }
 })
 </script>
-
-<style lang="less"></style>

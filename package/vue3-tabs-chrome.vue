@@ -36,6 +36,9 @@
           </span>
         </div>
       </div>
+      <span class="tabs-after" :ref="setAfterRef" :style="{ left: (tabWidth - gap * 2) * tabs.length + gap * 2 + 'px' }">
+        <slot name="after" />
+      </span>
     </div>
   </div>
 </template>
@@ -75,7 +78,7 @@ export interface Refs {
 export default defineComponent({
   name: 'vue3-tabs-chrome',
   components: { RenderTemp },
-  emits: ['click', 'update:modelValue', 'dragstart', 'dragging', 'dragend', 'swap', 'contextmenu'],
+  emits: ['click', 'update:modelValue', 'remove', 'dragstart', 'dragging', 'dragend', 'swap', 'contextmenu'],
   props: {
     modelValue: {
       type: [String, Number],
@@ -150,9 +153,7 @@ export default defineComponent({
     const calcTabWidth = () => {
       const { tabs, minWidth, maxWidth, gap } = props
       const $content: HTMLElement | null = $refs.$content
-      const afterWidth = 0
-      // // let after = this.$refs.after
-      // // let afterWidth = after.getBoundingClientRect().width
+      const afterWidth = $refs.$after?.getBoundingClientRect().width || 0
       if (!$content) return Math.max(maxWidth, minWidth)
       const contentWidth: number = $content.clientWidth - gap * 3 - afterWidth
       let width: number = contentWidth / tabs.length
@@ -336,6 +337,7 @@ export default defineComponent({
         emit('update:modelValue', null)
       }
       tabs.splice(i, 1)
+      emit('remove', tab, i)
 
       nextTick(() => {
         doLayout()
@@ -367,6 +369,8 @@ export default defineComponent({
      */
     const removeTab = (tabKey: string | number) => {
       const tabs = props.tabs
+      const emit = context.emit
+
       if (typeof tabKey === 'number') {
         const index: number = tabKey
         const tab = tabs[index]
@@ -507,6 +511,16 @@ export default defineComponent({
       }
     }
 
+    /**
+     * 添加后缀元素 dom 节点
+     * @param el 在 tab 后面的元素
+     */
+    const setAfterRef = (el: HTMLElement) => {
+      if (el) {
+        $refs.$after = el
+      }
+    }
+
     onMounted(() => {
       calcTabWidth()
       init()
@@ -518,7 +532,7 @@ export default defineComponent({
       timer && clearTimeout(timer)
     })
 
-    return { setTabRef, setContentRef, tabWidth, handleDelete, handleContextMenu, showTabCloseIcon, renderLabelText, doLayout, addTab, removeTab }
+    return { setTabRef, setContentRef, setAfterRef, tabWidth, handleDelete, handleContextMenu, showTabCloseIcon, renderLabelText, doLayout, addTab, removeTab }
   }
 })
 </script>

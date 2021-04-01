@@ -8,17 +8,19 @@
     @dragend="handleDragEnd"
     @contextmenu="handleContextMenu"
     @click="handleClick"
+    @remove="handleRemove"
   />
   <div class="events-tip">
     <p>List of events that can be triggered.</p>
     <p>The "dragging" event is too much, so it is omitted from the display and can be seen in the console again.</p>
     <ul>
+      <li>click</li>
+      <li>remove</li>
       <li>swap</li>
+      <li>contextmenu</li>
       <li>dragstart</li>
       <li>dragging</li>
       <li>dragend</li>
-      <li>contextmenu</li>
-      <li>click</li>
     </ul>
   </div>
   {{ events }}
@@ -96,8 +98,13 @@ export default defineComponent({
     }
 
     const handleClick = (event: Event, tab: Tab, index: number) => {
-      console.log(event, tab, index, 'mmmmmmmmm')
+      console.log(event, tab, index)
       events.push('click')
+    }
+
+    const handleRemove = (tab: Tab, index: number) => {
+      console.log(tab, index)
+      events.push('remove')
     }
 
     return {
@@ -111,6 +118,7 @@ export default defineComponent({
       handleDragEnd,
       handleContextMenu,
       handleClick,
+      handleRemove,
       handleClear
     }
   }
