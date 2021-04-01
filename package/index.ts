@@ -1,5 +1,5 @@
 import { App, Plugin } from 'vue'
-import Vue3TabsChrome from './Vue3TabsChrome.vue'
+import Vue3TabsChrome from './vue3-tabs-chrome.vue'
 
 const install = (app: App) => {
   app.component('Vue3TabsChrome', Vue3TabsChrome)

@@ -1,0 +1,54 @@
+.theme-dark {
+  color: #999;
+  background-color: #1d1e21;
+
+  .tabs-item {
+    &:hover {
+      .tabs-background-content {
+        background-color: #212529;
+      }
+
+      .tabs-background-after,
+      .tabs-background-before {
+        fill: #212529;
+      }
+    }
+
+    &.active {
+      color: #fff;
+
+      .tabs-background-content {
+        background-color: #2f2f33;
+      }
+
+      .tabs-background-after,
+      .tabs-background-before {
+        fill: #2f2f33;
+      }
+
+      .tabs-close {
+        background-color: #2f2f33;
+      }
+
+      .tabs-close-icon {
+        stroke: #fff;
+
+        &:hover {
+          stroke: #fff;
+        }
+      }
+    }
+
+    .tabs-close-icon:hover {
+      stroke: #bbb;
+      background-color: #4b4b4e;
+    }
+
+    .tabs-background-divider {
+      &::before,
+      &::after {
+        background-color: #535458;
+      }
+    }
+  }
+}
