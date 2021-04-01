@@ -53,7 +53,7 @@ export interface Tab {
   label: string
   /** 唯一 key */
   key: string
-  favico?: any
+  favico?: unknown
   /**
    * 是否可关闭
    */
@@ -67,6 +67,7 @@ export interface Tab {
    */
   dragable?: boolean
   $el?: HTMLElement
+  // eslint-disable-next-line
   _instance?: any
   _x?: number
 }
@@ -369,7 +370,6 @@ export default defineComponent({
      */
     const removeTab = (tabKey: string | number) => {
       const tabs = props.tabs
-      const emit = context.emit
 
       if (typeof tabKey === 'number') {
         const index: number = tabKey
