@@ -9,7 +9,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, Ref } from 'vue'
 import Vue3TabsChrome, { Tab } from '../../package/vue3-tabs-chrome.vue'
-import '../theme-dark.less'
 
 export default defineComponent({
   name: 'App',
