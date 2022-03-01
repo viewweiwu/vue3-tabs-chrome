@@ -7,7 +7,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name vue3-tabs-chrome ./package/index.ts"
+    "moveTs": "scp ./package/index.d.ts ./dist/index.d.ts && scp ./package/vue3-tabs-chrome.vue.d.ts ./dist/vue3-tabs-chrome.vue.d.ts",
+    "lib": "vue-cli-service build --target lib --name vue3-tabs-chrome ./package/index.ts && npm run moveTs"
   },
   "files": [
     "dist/**.*"
