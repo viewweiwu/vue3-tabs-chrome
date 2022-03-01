@@ -17,7 +17,7 @@
     "type": "git",
     "url": "https://github.com/viewweiwu/vue3-tabs-chrome.git"
   },
-  "main": "dist/index.js",
+  "main": "dist/vue3-tabs-chrome.common.js",
   "unpkg": "dist/vue3-tabs-chrome.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",
