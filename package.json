@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "moveTs": "scp ./package/index.d.ts ./dist/index.d.ts && scp ./package/vue3-tabs-chrome.vue.d.ts ./dist/vue3-tabs-chrome.vue.d.ts",
+    "moveTs": "scp ./package/index.d.ts ./dist/vue3-tabs-chrome.common.d.ts && scp ./package/vue3-tabs-chrome.vue.d.ts ./dist/vue3-tabs-chrome.vue.d.ts",
     "lib": "vue-cli-service build --target lib --name vue3-tabs-chrome ./package/index.ts && npm run moveTs"
   },
   "files": [
@@ -17,7 +17,7 @@
     "type": "git",
     "url": "https://github.com/viewweiwu/vue3-tabs-chrome.git"
   },
-  "main": "dist/vue3-tabs-chrome.common.js",
+  "main": "dist/index.js",
   "unpkg": "dist/vue3-tabs-chrome.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",

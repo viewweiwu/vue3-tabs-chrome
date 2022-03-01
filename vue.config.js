@@ -19,6 +19,7 @@ module.exports = {
           transpileOnly: false,
           happyPackMode: false
         }));
+      config.output.libraryExport = 'default';
     }
   },
   parallel: false
