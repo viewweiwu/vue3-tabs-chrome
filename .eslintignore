@@ -1,3 +1,4 @@
 package.json
+vue.config.js
 # 忽略第三方包
 **/node_modules
