@@ -118,6 +118,12 @@ yarn add vue3-tabs-chrome -S
 | ---------- | -------------- |
 | after      | Tab after slot |
 
+## Changelog
+
+### 0.3.0
+
+feat: add TypeScript support. [#PR5](https://github.com/viewweiwu/vue3-tabs-chrome/pull/5)
+
 ## License
 
 MIT
