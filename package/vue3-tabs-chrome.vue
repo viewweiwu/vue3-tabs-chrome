@@ -602,6 +602,10 @@ export default defineComponent({
         background-color: #f2f3f5;
       }
 
+      .tabs-background-divider {
+        display: none;
+      }
+
       .tabs-background-before,
       .tabs-background-after {
         fill: #f2f3f5;
