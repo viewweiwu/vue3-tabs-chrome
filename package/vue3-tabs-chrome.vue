@@ -46,14 +46,14 @@
 <script lang="ts">
 import RenderTemp from './render-temp.vue'
 import Draggabilly from 'draggabilly'
-import { defineComponent, ref, reactive, onMounted, PropType, nextTick, h, onUnmounted } from 'vue'
+import { defineComponent, ref, reactive, onMounted, PropType, nextTick, h, onUnmounted, ComponentPublicInstance } from 'vue'
 
 export interface Tab {
   /** 显示名称 */
   label: string
   /** 唯一 key */
   key: string
-  favico?: unknown
+  favico?: string
   /**
    * 是否可关闭
    */
@@ -73,11 +73,11 @@ export interface Tab {
 }
 
 export interface Refs {
-  [key: string]: HTMLElement | null
+  [key: string]: Element | null
 }
 
 export default defineComponent({
-  name: 'vue3-tabs-chrome',
+  name: 'VueTabsChrome',
   components: { RenderTemp },
   emits: ['click', 'update:modelValue', 'remove', 'dragstart', 'dragging', 'dragend', 'swap', 'contextmenu'],
   props: {
@@ -153,7 +153,7 @@ export default defineComponent({
      */
     const calcTabWidth = () => {
       const { tabs, minWidth, maxWidth, gap } = props
-      const $content: HTMLElement | null = $refs.$content
+      const { $content } = $refs
       const afterWidth = $refs.$after?.getBoundingClientRect().width || 0
       if (!$content) return Math.max(maxWidth, minWidth)
       const contentWidth: number = $content.clientWidth - gap * 3 - afterWidth
@@ -171,10 +171,10 @@ export default defineComponent({
      * @param i 当前拖拽的下标
      */
     const handlePointerDown = (e: Event, tab: Tab, i: number) => {
-      const emit = context.emit
-      const isMousedownActive = props.isMousedownActive
+      const { emit } = context
+      const { isMousedownActive } = props
       // 如果允许按下就 active，才命中
-      isMousedownActive && emit('update:modelValue', tab.key)
+      if (isMousedownActive) emit('update:modelValue', tab.key)
       emit('update:modelValue', tab.key)
       emit('dragstart', e, tab, i)
     }
@@ -187,7 +187,7 @@ export default defineComponent({
      */
     const handleDragMove = (e: Event, tab: Tab, i: number) => {
       const { tabs, gap } = props
-      const emit = context.emit
+      const { emit } = context
 
       if (tab.swappable === false) {
         return
@@ -196,7 +196,7 @@ export default defineComponent({
       // 获取一半 tab 宽度
       const halfWidth = (tabWidth.value - gap) / 2
       // 获取 tab 当前的 x 值
-      const x = tab._instance.position.x
+      const { x } = tab._instance.position
       let swapTab: Tab | null = null
       for (let i = 0; i < tabs.length; i++) {
         const currentTab: Tab = tabs[i]
@@ -204,6 +204,7 @@ export default defineComponent({
 
         // 如果命中自己本身，则无需交换
         if (tab.key === currentTab.key) {
+          // eslint-disable-next-line no-continue
           continue
         }
         // 判断是否有重叠的 tab，只需要判定是否在前半部分即可
@@ -226,7 +227,7 @@ export default defineComponent({
         return
       }
       const { tabs } = props
-      const emit = context.emit
+      const { emit } = context
 
       let index = -1
       let swapIndex = -1
@@ -249,12 +250,12 @@ export default defineComponent({
       ;[tabs[index], tabs[swapIndex]] = [tabs[swapIndex], tabs[index]]
 
       // swap x
-      const _x = tab._x
+      const { _x } = tab
       tab._x = swapTab._x
       swapTab._x = _x
 
       // swap position
-      const _instance = swapTab._instance
+      const { _instance } = swapTab
       setTimeout(() => {
         _instance.element.classList.add('move')
         _instance.setPosition(_x, _instance.position.y)
@@ -272,8 +273,8 @@ export default defineComponent({
      * @param i 当前拖拽的下标
      */
     const handleDragEnd = (e: Event, tab: Tab, i: number) => {
-      const _instance = tab._instance
-      const emit = context.emit
+      const { _instance } = tab
+      const { emit } = context
 
       if (_instance.position.x === 0) return
       setTimeout(() => {
@@ -294,7 +295,7 @@ export default defineComponent({
      * @param i 当前单击的下标
      */
     const handleClick = (e: Event, tab: Tab, i: number) => {
-      const emit = context.emit
+      const { emit } = context
       emit('click', e, tab, i)
     }
 
@@ -305,7 +306,7 @@ export default defineComponent({
      * @param i 当前右键的下标
      */
     const handleContextMenu = (e: Event, tab: Tab, i: number) => {
-      const emit = context.emit
+      const { emit } = context
       emit('contextmenu', e, tab, i)
     }
 
@@ -316,7 +317,7 @@ export default defineComponent({
      */
     const handleDelete = (tab: Tab, i: number) => {
       const { tabs, modelValue, onClose } = props
-      const emit = context.emit
+      const { emit } = context
       const index = tabs.findIndex(item => item.key === modelValue)
 
       // 可以通过 onClose 返回 false 来主动阻止事件
@@ -369,7 +370,7 @@ export default defineComponent({
      * @param tabKey 如果为数字则判定为用下标删除
      */
     const removeTab = (tabKey: string | number) => {
-      const tabs = props.tabs
+      const { tabs } = props
 
       if (typeof tabKey === 'number') {
         const index: number = tabKey
@@ -390,8 +391,8 @@ export default defineComponent({
      * 窗口改变，重新布局
      */
     const handleResize = () => {
-      timer && clearTimeout(timer)
-      timer = setTimeout(() => {
+      if (timer) window.clearTimeout(timer)
+      timer = window.setTimeout(() => {
         doLayout()
       }, 100)
     }
@@ -423,9 +424,8 @@ export default defineComponent({
       const { renderLabel } = props
       if (renderLabel) {
         return renderLabel(tab)
-      } else {
-        return h('span', tab.label)
       }
+      return h('span', tab.label)
     }
 
     /**
@@ -495,9 +495,9 @@ export default defineComponent({
      * @param el 当前 tab 对应的 dom 元素
      * @param tab 当前命中 tab
      */
-    const setTabRef = (el: HTMLElement, tab: Tab) => {
+    const setTabRef = (el: Element | ComponentPublicInstance | null, tab: Tab) => {
       if (el) {
-        tab.$el = el
+        tab.$el = el as HTMLElement
       }
     }
 
@@ -505,9 +505,9 @@ export default defineComponent({
      * 添加容器 dom 节点
      * @param el tab 对应的 dom 父元素
      */
-    const setContentRef = (el: HTMLElement) => {
+    const setContentRef = (el: Element | ComponentPublicInstance | null) => {
       if (el) {
-        $refs.$content = el
+        $refs.$content = el as Element
       }
     }
 
@@ -515,9 +515,9 @@ export default defineComponent({
      * 添加后缀元素 dom 节点
      * @param el 在 tab 后面的元素
      */
-    const setAfterRef = (el: HTMLElement) => {
+    const setAfterRef = (el: Element | ComponentPublicInstance | null) => {
       if (el) {
-        $refs.$after = el
+        $refs.$after = el as Element
       }
     }
 
@@ -529,10 +529,22 @@ export default defineComponent({
 
     onUnmounted(() => {
       window.removeEventListener('resize', handleResize)
-      timer && clearTimeout(timer)
+      if (timer) window.clearTimeout(timer)
     })
 
-    return { setTabRef, setContentRef, setAfterRef, tabWidth, handleDelete, handleContextMenu, showTabCloseIcon, renderLabelText, doLayout, addTab, removeTab }
+    return {
+      setTabRef,
+      setContentRef,
+      setAfterRef,
+      tabWidth,
+      handleDelete,
+      handleContextMenu,
+      showTabCloseIcon,
+      renderLabelText,
+      doLayout,
+      addTab,
+      removeTab
+    }
   }
 })
 </script>
