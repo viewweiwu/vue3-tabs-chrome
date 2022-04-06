@@ -7,8 +7,8 @@
         :class="{ active: tab.key === modelValue }"
         :key="tab.key"
         :style="{ width: tabWidth + 'px' }"
-        :ref="e => setTabRef(e, tab)"
-        @contextmenu="e => handleContextMenu(e, tab, i)"
+        :ref="(e) => setTabRef(e, tab)"
+        @contextmenu="(e) => handleContextMenu(e, tab, i)"
       >
         <div class="tabs-background">
           <div class="tabs-background-divider"></div>
@@ -36,7 +36,11 @@
           </span>
         </div>
       </div>
-      <span class="tabs-after" :ref="setAfterRef" :style="{ left: (tabWidth - gap * 2) * tabs.length + gap * 2 + 'px' }">
+      <span
+        class="tabs-after"
+        :ref="setAfterRef"
+        :style="{ left: (tabWidth - gap * 2) * tabs.length + gap * 2 + 'px' }"
+      >
         <slot name="after" />
       </span>
     </div>
@@ -46,7 +50,17 @@
 <script lang="ts">
 import RenderTemp from './render-temp.vue'
 import Draggabilly from 'draggabilly'
-import { defineComponent, ref, reactive, onMounted, PropType, nextTick, h, onUnmounted, ComponentPublicInstance } from 'vue'
+import {
+  defineComponent,
+  ref,
+  reactive,
+  onMounted,
+  PropType,
+  nextTick,
+  h,
+  onUnmounted,
+  ComponentPublicInstance
+} from 'vue'
 
 export interface Tab {
   /** 显示名称 */
@@ -174,8 +188,9 @@ export default defineComponent({
       const { emit } = context
       const { isMousedownActive } = props
       // 如果允许按下就 active，才命中
-      if (isMousedownActive) emit('update:modelValue', tab.key)
-      emit('update:modelValue', tab.key)
+      if (isMousedownActive) {
+        emit('update:modelValue', tab.key)
+      }
       emit('dragstart', e, tab, i)
     }
 
@@ -318,7 +333,7 @@ export default defineComponent({
     const handleDelete = (tab: Tab, i: number) => {
       const { tabs, modelValue, onClose } = props
       const { emit } = context
-      const index = tabs.findIndex(item => item.key === modelValue)
+      const index = tabs.findIndex((item) => item.key === modelValue)
 
       // 可以通过 onClose 返回 false 来主动阻止事件
       if (typeof onClose === 'function' && onClose(tab, tab.key, i) === false) {
@@ -353,7 +368,7 @@ export default defineComponent({
     const addTab = (...newTabs: Array<Tab>) => {
       const { insertToAfter, modelValue, tabs } = props
       if (insertToAfter) {
-        const i = tabs.findIndex(tab => tab.key === modelValue)
+        const i = tabs.findIndex((tab) => tab.key === modelValue)
         tabs.splice(i + 1, 0, ...newTabs)
       } else {
         tabs.push(...newTabs)
@@ -377,8 +392,8 @@ export default defineComponent({
         const tab = tabs[index]
         handleDelete(tab, index)
       } else {
-        const index: number = tabs.findIndex(item => item.key === tabKey)
-        const tab: Tab | undefined = tabs.find(item => item.key === tabKey)
+        const index: number = tabs.findIndex((item) => item.key === tabKey)
+        const tab: Tab | undefined = tabs.find((item) => item.key === tabKey)
         if (tab) {
           handleDelete(tab, index)
         }
