@@ -120,6 +120,12 @@ yarn add vue3-tabs-chrome -S
 
 ## Changelog
 
+### 0.3.1
+
+`2022-04-06`
+
+fix: is-mousedown-active bug. [#7](https://github.com/viewweiwu/vue3-tabs-chrome/issues/7)
+
 ### 0.3.0
 
 feat: add TypeScript support. [#PR5](https://github.com/viewweiwu/vue3-tabs-chrome/pull/5)
