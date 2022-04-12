@@ -120,6 +120,12 @@ yarn add vue3-tabs-chrome -S
 
 ## Changelog
 
+### 0.3.2
+
+`2022-04-12`
+
+fix: remove debugger trigger. [#8](https://github.com/viewweiwu/vue3-tabs-chrome/issues/8)
+
 ### 0.3.1
 
 `2022-04-06`
