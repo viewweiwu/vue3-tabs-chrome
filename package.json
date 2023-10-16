@@ -1,6 +1,6 @@
 {
   "name": "vue3-tabs-chrome",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@types/draggabilly": "^2.1.2",
-    "@types/node": "^18.14.4",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",

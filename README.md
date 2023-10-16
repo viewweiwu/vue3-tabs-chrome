@@ -120,6 +120,12 @@ yarn add vue3-tabs-chrome -S
 
 ## Changelog
 
+### 0.3.3
+
+`2023-10-16`
+
+fix: dragable = false No click event is triggered. [#19](https://github.com/viewweiwu/vue3-tabs-chrome/issues/19)
+
 ### 0.3.2
 
 `2022-04-12`

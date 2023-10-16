@@ -52,6 +52,7 @@ export default defineComponent({
       {
         label: 'facebook',
         key: 'facebook',
+        dragable: false,
         favico: require('../assets/fb.jpg')
       },
       {

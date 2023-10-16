@@ -9,6 +9,7 @@
         :style="{ width: tabWidth + 'px' }"
         :ref="(e) => setTabRef(e, tab)"
         @contextmenu="(e) => handleContextMenu(e, tab, i)"
+        @click="(e) => handleNativeClick(e, tab, i)"
       >
         <div class="tabs-background">
           <div class="tabs-background-divider"></div>
@@ -317,6 +318,18 @@ export default defineComponent({
     }
 
     /**
+     * 原生点击事件
+     * @param e 单击事件
+     * @param tab 命中的 tab
+     * @param i 当前单击的下标
+     */
+    const handleNativeClick = (e: Event, tab: Tab, i: number) => {
+      if (tab.dragable === false) {
+        handleClick(e, tab, i)
+      }
+    }
+
+    /**
      * 右键事件监听
      * @param e 右键事件
      * @param tab 命中的 tab
@@ -558,6 +571,7 @@ export default defineComponent({
       handleContextMenu,
       showTabCloseIcon,
       renderLabelText,
+      handleNativeClick,
       doLayout,
       addTab,
       removeTab
